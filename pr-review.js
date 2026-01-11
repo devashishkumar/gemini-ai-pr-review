@@ -33,6 +33,43 @@ async function getPRDiff() {
     return await response.text();
 }
 
+
+// ---- GEMINI REVIEW ----
+async function geminiPrReview(diff) {
+    const prompt = `
+You are a senior developer.
+Review the following GitHub Pull Request.
+
+Focus on:
+- Bugs
+- Security issues
+- Performance
+- Code quality
+- Best practices
+
+Provide:
+- Severity labels
+- Clear suggestions
+- Short summary
+
+DIFF:
+${diff}
+`;
+
+    const result = await model.generateContent(prompt);
+    return result.response.text();
+}
+
+// ---- POST PR COMMENT ----
+async function shareReview(comment) {
+    await octokit.issues.createComment({
+        owner: OWNER,
+        repo: REPO,
+        issue_number: PR_NUMBER,
+        body: `## 🤖 Gemini AI Code Review\n\n${comment}`,
+    });
+}
+
 // ---- MAIN ----
 async function main() {
     try {
