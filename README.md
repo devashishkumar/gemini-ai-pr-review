@@ -1,8 +1,8 @@
-### Documentation
+## Documentation
 
 Node JS, Gemini AI Based PR Review Application
 
-## How to setup application ?
+### How to setup application ?
 
 ```sh
 1. Create an API Key using url. (https://aistudio.google.com/app/apikey)
@@ -14,4 +14,4 @@ GEMINI_AI_API_KEY=your api key
 6. Execute command 'nodemon start'
 ```
 
-## PR Review Code Implementation (In Progress)
+### PR Review Code Implementation (In Progress)
