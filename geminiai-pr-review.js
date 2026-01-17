@@ -21,12 +21,16 @@ async function getPRDiff(owner, repo, pull_number) {
 }
 
 async function analyzeWithGemini(diff) {
-    const response = await axios.post("https://api.gemini.ai/v1/analyze", {
-        prompt: `Review this PR diff:\n${diff}`
-    }, {
-        headers: { Authorization: `Bearer ${GEMINI_API_KEY}` }
-    });
-    return response.data;
+  const response = await axios.post(
+    "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent?key=" + GEMINI_API_KEY,
+    {
+      contents: [{ parts: [{ text: `Review this PR diff:\n${diff}` }] }]
+    },
+    {
+      headers: { "Content-Type": "application/json" }
+    }
+  );
+  return response.data;
 }
 
 async function postReview(owner, repo, pull_number, body) {
@@ -39,10 +43,10 @@ async function postReview(owner, repo, pull_number, body) {
     });
 }
 
-
 (async () => {
     const diff = await getPRDiff(OWNER, REPO, PR_NUMBER);
-    console.log(diff);
+    const prReview = await analyzeWithGemini(diff);
+    await postReview(OWNER, REPO, PR_NUMBER, prReview);
 })();
 
 
