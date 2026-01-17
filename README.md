@@ -14,4 +14,6 @@ GEMINI_AI_API_KEY=your api key
 6. Execute command 'nodemon start'
 ```
 
-### PR Review Code Implementation (In Progress)
+### PR Review Code Implementation
+
+### As of now this is console based app. Working on UI to use this app from the browser.
