@@ -16,4 +16,4 @@ GEMINI_AI_API_KEY=your api key
 
 ### PR Review Code Implementation
 
-### As of now this is console based app. Working on UI to use this app from the browser.
+### Application is currently console-based, with a web UI under development to enable browser access
